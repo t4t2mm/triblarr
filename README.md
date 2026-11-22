@@ -40,5 +40,5 @@ host:8085/ui/#/downloads/all?key=ChangeMeForTriblerRadarr
 
 Tribler-sonarr
 ~~~
-host:8085/ui/#/downloads/all?key=ChangeMeForTriblerRadarr
+host:8086/ui/#/downloads/all?key=ChangeMeForTriblerSonarr
 ~~~
