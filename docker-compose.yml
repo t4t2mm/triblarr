@@ -37,7 +37,7 @@ services:
       - DATA_DIR=/data # Should match the data dir inside your servarr application containers 
       - DOWNLOAD_DIR=/torrents/tv # The download dir within the data dir, here /data/torrents/tv for sonarr
     volumes:
-      - /path/to/tribler/radarr/config:/home/ubuntu/.Tribler
+      - /path/to/tribler/sonarr/config:/home/ubuntu/.Tribler
       - /path/to/servarr/data:/data # Should match the data dir inside your servarr application containers
     networks:
       - servarr-net # Adapt to your docker network configuration
