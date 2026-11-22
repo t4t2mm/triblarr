@@ -1,21 +1,43 @@
 services:
-  tribler:
+  tribler-radarr:
     build: .
-    container_name: tribler
+    container_name: tribler-radarr
     restart: unless-stopped
     ports:
       - "8085:8085" # http
-      - "6881-6889:6881-6889" # bittorrent
-      - "8090-8091:8090-8091" # ipv8
+      - "6881:6881" # bittorrent
+      - "8090:8090" # ipv8
     environment:
       - PUID=1000 # Should match the UID used for your servarr application containers
       - PGID=1000 # Should match the GID used for your servarr application containers
       - CORE_API_PORT=8085
-      - CORE_API_KEY=changeme # Choose a password to access Web UI
+      - CORE_API_KEY=ChangeMeForTriblerRadarr # Choose a password to access Web UI
       - DATA_DIR=/data # Should match the data dir inside your servarr application containers 
-      - DOWNLOAD_DIR=/torrents # The download dir within the data dir, here /data/torrents
+      - DOWNLOAD_DIR=/torrents/movies # The download dir within the data dir, here /data/torrents/movies for radarr
     volumes:
-      - /path/to/tribler/config:/home/ubuntu/.Tribler
+      - /path/to/tribler/radarr/config:/home/ubuntu/.Tribler
+      - /path/to/servarr/data:/data # Should match the data dir inside your servarr application containers
+    networks:
+      - servarr-net # Adapt to your docker network configuration
+    command: -s # -s, --server : Run headless as a server without graphical pystray interface
+
+  tribler-sonarr:
+    build: .
+    container_name: tribler-sonarr
+    restart: unless-stopped
+    ports:
+      - "8086:8085" # http
+      - "6882:6881" # bittorrent
+      - "8091:8090" # ipv8
+    environment:
+      - PUID=1000 # Should match the UID used for your servarr application containers
+      - PGID=1000 # Should match the GID used for your servarr application containers
+      - CORE_API_PORT=8085
+      - CORE_API_KEY=ChangeMeForTriblerRadarr # Choose a password to access Web UI
+      - DATA_DIR=/data # Should match the data dir inside your servarr application containers 
+      - DOWNLOAD_DIR=/torrents/tv # The download dir within the data dir, here /data/torrents/tv for sonarr
+    volumes:
+      - /path/to/tribler/radarr/config:/home/ubuntu/.Tribler
       - /path/to/servarr/data:/data # Should match the data dir inside your servarr application containers
     networks:
       - servarr-net # Adapt to your docker network configuration
