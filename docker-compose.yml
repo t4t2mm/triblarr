@@ -33,7 +33,7 @@ services:
       - PUID=1000 # Should match the UID used for your servarr application containers
       - PGID=1000 # Should match the GID used for your servarr application containers
       - CORE_API_PORT=8085
-      - CORE_API_KEY=ChangeMeForTriblerRadarr # Choose a password to access Web UI
+      - CORE_API_KEY=ChangeMeForTriblerSonarr # Choose a password to access Web UI
       - DATA_DIR=/data # Should match the data dir inside your servarr application containers 
       - DOWNLOAD_DIR=/torrents/tv # The download dir within the data dir, here /data/torrents/tv for sonarr
     volumes:
